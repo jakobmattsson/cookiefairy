@@ -9,11 +9,11 @@ $(document).ready(function(){
   outer.style.position = "relative";
   outer.style.left = "-10000px";
   document.getElementsByTagName("body")[0].appendChild(outer);
-  
+
   var id = "SharedObjects-swf";
   var inner = document.createElement('div');
   inner.id = id;
   outer.appendChild(inner);
-  
+
   swfobject.embedSWF(url, inner.id, 1, 1, "7", null, { embedId: id }, { allowScriptAccess: "always" }, { id: id, name: id });
 });
