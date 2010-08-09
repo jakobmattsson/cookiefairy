@@ -25,15 +25,13 @@ var embedFunc = "function(embedId) {"
   + "      setData: function(key, value) { return fla.soSetData(id, key, value); }"
   + "    };"
   + "  };"
-  + "  SharedObject.debugLog = function(msg) { return fla.soDebugLog(msg); };"
   + "  if (typeof SharedObject.onload == 'function')"
   + "    SharedObject.onload();"
   + "}";
 
+
 function debugLog(str) {
-  if (debugging && str) {
-    ExternalInterface.call(debugFunc + "('" + str.split("'").join("\\\'") +  "')");
-  }
+  ExternalInterface.call(debugFunc + "('" + str.split("'").join("\\\'") +  "')");
 }
 
 ExternalInterface.addCallback("soGetLocal", null, function(name, localPath, secure) {
