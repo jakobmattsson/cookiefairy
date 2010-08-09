@@ -35,6 +35,7 @@
     };
 
     SharedObject = {
+      debugLog: (console ? console.log : alert),
       onload: function(){
         SharedObject.debugLog("If this message can be seen, then debugging is working");
         window.so = SharedObject.getLocal("jslso", "/");

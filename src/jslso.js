@@ -15,5 +15,5 @@ $(document).ready(function(){
   inner.id = id;
   outer.appendChild(inner);
   
-  swfobject.embedSWF(url, inner.id, 1, 1, "7", null, { embedId: id, debug: "console.log" }, { allowScriptAccess: "always" }, { id: id, name: id });
+  swfobject.embedSWF(url, inner.id, 1, 1, "7", null, { embedId: id }, { allowScriptAccess: "always" }, { id: id, name: id });
 });

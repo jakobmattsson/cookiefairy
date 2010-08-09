@@ -3,11 +3,37 @@ import flash.external.ExternalInterface;
 var sharedObjects = { };
 var keyCounter = 0;
 var embedId = _root.embedId.toString();
-var debugging = _root.debug;
+
+var debugFunc = "function(msg) {"
+  + "if (window && window.SharedObject && typeof window.SharedObject.debugLog == 'function')"
+  + "  window.SharedObject.debugLog(msg);"
+  + "}";
+
+var embedFunc = "function(embedId) {"
+  + "  var fla = document.getElementById(embedId);"
+  + "  if (!window.SharedObject)"
+  + "    window.SharedObject = {};"
+  + "  SharedObject.getLocal = function(name, localPath, secure) {"
+  + "    var id = fla.soGetLocal(name, localPath, secure);"
+  + "    if (!id) return undefined;"
+  + "    return {"
+  + "      flush: function(minimumDiskSpace) { return fla.soFlush(id, minimumDiskSpace); },"
+  + "      close: function() { return fla.soClose(id); },"
+  + "      getSize: function() { return fla.soGetSize(id); },"
+  + "      getData: function() { return fla.soGetData(id); },"
+  + "      deleteData: function(key) { return fla.soDeleteData(id, key); },"
+  + "      setData: function(key, value) { return fla.soSetData(id, key, value); }"
+  + "    };"
+  + "  };"
+  + "  SharedObject.debugLog = function(msg) { return fla.soDebugLog(msg); };"
+  + "  if (typeof SharedObject.onload == 'function')"
+  + "    SharedObject.onload();"
+  + "}";
 
 function debugLog(str) {
-  if (debugging && str)
-    ExternalInterface.call(debugging + "('" + str.split("'").join("\\\'") +  "')");
+  if (debugging && str) {
+    ExternalInterface.call(debugFunc + "('" + str.split("'").join("\\\'") +  "')");
+  }
 }
 
 ExternalInterface.addCallback("soGetLocal", null, function(name, localPath, secure) {
@@ -91,28 +117,5 @@ ExternalInterface.addCallback("soClose", null, function(id) {
     return false;
   }
 });
-
-ExternalInterface.addCallback("soDebugLog", null, debugLog);
-
-var embedFunc = "function(embedId) {"
- + "  var fla = document.getElementById(embedId);"
- + "  if (!window.SharedObject)"
- + "    window.SharedObject = {};"
- + "  SharedObject.getLocal = function(name, localPath, secure) {"
- + "    var id = fla.soGetLocal(name, localPath, secure);"
- + "    if (!id) return undefined;"
- + "    return {"
- + "      flush: function(minimumDiskSpace) { return fla.soFlush(id, minimumDiskSpace); },"
- + "      close: function() { return fla.soClose(id); },"
- + "      getSize: function() { return fla.soGetSize(id); },"
- + "      getData: function() { return fla.soGetData(id); },"
- + "      deleteData: function(key) { return fla.soDeleteData(id, key); },"
- + "      setData: function(key, value) { return fla.soSetData(id, key, value); }"
- + "    };"
- + "  };"
- + "  SharedObject.debugLog = function(msg) { return fla.soDebugLog(msg); };"
- + "  if (typeof SharedObject.onload == 'function')"
- + "    SharedObject.onload();"
- + "}";
 
 ExternalInterface.call(embedFunc + "('" + embedId + "')");
