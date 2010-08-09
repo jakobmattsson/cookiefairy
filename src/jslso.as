@@ -7,8 +7,7 @@ var debugging = _root.debug;
 
 function debugLog(str) {
   if (debugging && str)
-    return ExternalInterface.call(debugging + "('" + str.split("'").join("\\\'") +  "')");
-  return undefined;
+    ExternalInterface.call(debugging + "('" + str.split("'").join("\\\'") +  "')");
 }
 
 ExternalInterface.addCallback("soGetLocal", null, function(name, localPath, secure) {
