@@ -4,6 +4,31 @@
 
 A bridge from JavaScript to Adobe Flash's local shared objects, also known as Flash cookies.
 
+== How do I install it?
+
+1. Put jslso.swf and jslso.js on your webserver.
+2. Update the contents of jslso.js so that the url-variable contains the path to jslso.swf.
+3. Include jslso.js on the pages where you want to access Flash cookies.
+4. A global object called "SharedObject" now exposes a JavaScript-API that you can start using.
+
+== How do I use the API?
+
+SharedObject has a single method for interacting with Flash cookies. It's called 'getLocal' and works like Flash's own 'SharedObject.getLocal' (see Adobes own description {here}[http://www.adobe.com/support/flash/action_scripts/local_shared_object/local_shared_object05.html). NOTE: The object returned by jslso's getLocal does not look exactly like Flash's, even though very similar.
+
+The objects returned by getLocal has the following methods:
+
+* flush (corresponds to {Flash's flush}[http://www.adobe.com/support/flash/action_scripts/local_shared_object/local_shared_object04.html])
+* getSize (corresponds to {Flash's getSize}[http://www.adobe.com/support/flash/action_scripts/local_shared_object/local_shared_object06.html])
+* close - Flushes and closes the shared object. Doesn't take any arguments.
+* getData - Returns the whole data set for this shared object. Doesn't take any arguments.
+* deleteData - Deletes one key (and it's value) from the shared object. Takes the key as argument.
+* setData - Sets the value of a key in the shared object. Takes the key as it's first argument and the value as the second.
+
+The global SharedObject has 2 optional callbacks that the user can define:
+
+* onload - Invoked when the jslso.swf is finished loading. Doesn't take any arguments.
+* debugLog - Invoked whenever something happens on the Flash-side of things. Takes a single string argument containing a message. Called alot, with boring messages. Recommended for debugging only.
+
 == License:
 
 (The MIT License)
