@@ -3,7 +3,7 @@
 // * http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js
 
 $(document).ready(function(){
-  var url = "../bin/jslso.swf";
+  var url = "../bin/cookiefairy.swf";
 
   var outer = document.createElement('div');
   outer.style.position = "relative";

@@ -42,14 +42,14 @@
           alert(msg);
       },
       onload: function(){
-        window.so = SharedObject.getLocal("jslso", "/");
+        window.so = SharedObject.getLocal("testCookie", "/");
         $(":submit").each(function(e){
           this.disabled = "";
         });
       }
     };
   </script>
-  <script src="../src/jslso.js"></script>  
+  <script src="../src/cookiefairy.js"></script>  
 </head>
 <body>
   <div>

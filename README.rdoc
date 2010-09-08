@@ -1,4 +1,4 @@
-= JSLSO
+= Cookie Fairy
 
 == What is it?
 
@@ -6,14 +6,14 @@ A bridge from JavaScript to Adobe Flash's local shared objects, also known as Fl
 
 == How do I install it?
 
-1. Put jslso.swf and jslso.js on your webserver.
-2. Update the contents of jslso.js so that the url-variable on line 6 contains the path to jslso.swf.
-3. Include jslso.js on the pages where you want to access Flash cookies.
+1. Put cookiefairy.swf and cookiefairy.js on your webserver.
+2. Update the contents of cookiefairy.js so that the url-variable on line 6 contains the path to cookiefairy.swf.
+3. Include cookiefairy.js on the pages where you want to access Flash cookies.
 4. A global object called "SharedObject" now exposes a JavaScript-API that you can start using.
 
 == How do I use the API?
 
-SharedObject has a single method for interacting with Flash cookies. It's called 'getLocal' and works like Flash's own {SharedObject.getLocal}[http://www.adobe.com/support/flash/action_scripts/local_shared_object/local_shared_object05.html]. NOTE: The object returned by jslso's getLocal does not look exactly like Flash's, even though very similar.
+SharedObject has a single method for interacting with Flash cookies. It's called 'getLocal' and works like Flash's own {SharedObject.getLocal}[http://www.adobe.com/support/flash/action_scripts/local_shared_object/local_shared_object05.html]. NOTE: The object returned by cookiefairy's getLocal does not look exactly like Flash's, even though very similar.
 
 The objects returned by getLocal has the following methods:
 
@@ -26,7 +26,7 @@ The objects returned by getLocal has the following methods:
 
 The global SharedObject has 2 optional callbacks that the user can define:
 
-* onload - Invoked when the jslso.swf is finished loading. Doesn't take any arguments.
+* onload - Invoked when the cookiefairy.swf is finished loading. Doesn't take any arguments.
 * debugLog - Invoked whenever something happens on the Flash-side of things. Takes a single string argument containing a message. Called alot, with boring messages. Recommended for debugging only.
 
 == License:
