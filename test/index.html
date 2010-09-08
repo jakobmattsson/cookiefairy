@@ -42,7 +42,6 @@
           alert(msg);
       },
       onload: function(){
-        SharedObject.debugLog("If this message can be seen, then debugging is working");
         window.so = SharedObject.getLocal("jslso", "/");
         $(":submit").each(function(e){
           this.disabled = "";
